@@ -17,12 +17,19 @@ A production-style REST API with user authentication and a relational database.
 - JWT authentication (OAuth2 password flow, bcrypt password hashing)
 - Role-based access control — users manage their own todos; admins can access all
 - Full CRUD for todos scoped to the authenticated user
-- User profile and password change endpoints
+- User profile, password change, and phone number endpoints
 - Pydantic v2 request validation
+- Health check endpoint (`GET /healthy`)
+- Pytest test suite with isolated SQLite test database and dependency overrides
 
-**Stack:** FastAPI · SQLAlchemy · PostgreSQL (initially SQLite) · python-jose · passlib
+**Stack:** FastAPI · SQLAlchemy · PostgreSQL · SQLite (testing) · python-jose · passlib · bcrypt · pytest
 
 **Routers:** `auth` · `todos` · `admin` · `user`
+
+**Running tests:**
+```bash
+uv run pytest TodoApp/test/ -v
+```
 
 ## Setup
 
