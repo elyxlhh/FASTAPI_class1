@@ -16,9 +16,6 @@ wheels/
 # macOS
 .DS_Store
 
-# Reference course material
-FastAPI-The-Complete-Course-main/
-
 # Testing & coverage
 .pytest_cache/
 .coverage
