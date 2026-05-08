@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 from ..models import Users
 from passlib.context import CryptContext
@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
+from fastapi.templating import Jinja2Templates
 
 router = APIRouter(
     prefix='/auth',
@@ -46,6 +47,21 @@ def get_db():
 # Annotated: 给类型做附加说明（给工具/框架提供信息的）
 db_dependency = Annotated[Session, Depends(get_db)]
 
+templates = Jinja2Templates(directory="TodoApp/templates")
+
+
+### Pages
+@router.get('/login-page')
+def render_login_page(request: Request):
+    return templates.TemplateResponse(request, "login.html")
+
+
+@router.get('/register-page')
+def render_register_page(request: Request): 
+    return templates.TemplateResponse(request, "register.html")
+
+
+### Endpoints
 def authenticate_user(username: str, password: str, db):
     user = db.query(Users).filter(Users.username == username).first()
     if not user:
