@@ -1,11 +1,12 @@
-{% include 'layout.html' %}
+{% extends 'layout.html' %}
 
+{% block content %}
 <div class="container">
     <div class="card text-center">
-        <div class="card header">
+        <div class="card-header">
             Your todos!
         </div>
-        <div class="card body">
+        <div class="card-body">
             <h5 class="card-title">
                 list of todos!
             </h5>
@@ -51,3 +52,4 @@
         </div>
     </div>
 </div>
+{% endblock %}
